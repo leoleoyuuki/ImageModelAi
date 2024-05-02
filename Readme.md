@@ -9,13 +9,13 @@ Para utilizar este projeto, siga estas etapas:
 1. Clone este repositório em seu ambiente local:
 
 ```plaintext
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/leoleoyuuki/ImageModelAi.git
 ```
 
 2. Navegue até o diretório clonado:
 
 ```plaintext
-cd nome-do-repositorio
+cd ImageModelAi
 ```
 
 
