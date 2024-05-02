@@ -6,13 +6,24 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 67%;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    animation: fadeIn 1s ease-in-out; /* Adicionando animação de fade-in */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 h1 {
@@ -30,14 +41,22 @@ button {
     margin-bottom: 20px;
 }
 
-.opcoes{
+.opcoes {
     color: #3498dbc3;
     font-weight: 600;
 }
 
-
 #webcam-container {
     margin-top: 20px;
+    width: 100%;
+    overflow: hidden;
+}
+
+#webcam-container video {
+    width: 100%;
+    height: auto;
+    min-height: calc(100% / 16 * 9); /* Proporção de 16:9 */
+    min-width: calc(100% / 9 * 16); /* Proporção de 16:9 */
 }
 
 #label-container {
@@ -48,4 +67,14 @@ button {
     margin-top: 10px;
     font-size: 18px;
     color: #333;
+}
+
+.introduction {
+    margin-top: 50px;
+    text-align: left;
+}
+
+.instruction {
+    margin-top: 30px;
+    text-align: left;
 }

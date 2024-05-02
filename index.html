@@ -1,80 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="pt-br">
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Image Model</title>
+    <title>Modelo de Imagem</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
-  </head>
-  <body>
+    
+</head>
+
+<body>
     <div class="container">
-      <h1>Image Model</h1>
-      <p class="opcoes">Garrafa | Celular</p>
-      <button type="button" onclick="init()">Start</button>
-      <div id="webcam-container"></div>
-      <div id="label-container"></div>
+        <h1>Modelo de Imagem</h1>
+        <div class="introduction">
+            <p>Bem-vindo ao nosso Sistema de Reconhecimento de Imagens!</p>
+            <p>Este sistema pode identificar objetos em imagens usando tecnologia de aprendizado de máquina.</p>
+            <p>Sendo Eles:</p>
+            <ul>
+              <li>Garrafa</li>
+              <li>Celular</li>
+            </ul>
+        </div>
+        <div class="instruction">
+            <p>Para começar, clique no botão "Iniciar" abaixo e conceda permissão para acessar sua webcam.</p>
+            <p>Em seguida, segure um objeto em frente à sua webcam, e o sistema tentará identificá-lo.</p>
+        </div>
+        <button type="button" onclick="init()">Iniciar</button>
+        <div id="webcam-container"></div>
+        <div id="label-container"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     <script type="text/javascript">
-      // More API functions here:
-      // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+        // Mais funções da API aqui:
+        // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
-      // the link to your model provided by Teachable Machine export panel
-      const URL = "https://teachablemachine.withgoogle.com/models/Itj7sD_PX/";
+        // O link para o seu modelo fornecido pelo painel de exportação do Teachable Machine
+        const URL = "https://teachablemachine.withgoogle.com/models/Itj7sD_PX/";
 
-      let model, webcam, labelContainer, maxPredictions;
+        let model, webcam, labelContainer, maxPredictions;
 
-      // Load the image model and setup the webcam
-      async function init() {
-        const modelURL = URL + "model.json";
-        const metadataURL = URL + "metadata.json";
+        // Carregar o modelo de imagem e configurar a webcam
+        async function init() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
 
-        // load the model and metadata
-        // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-        // or files from your local hard drive
-        // Note: the pose library adds "tmImage" object to your window (window.tmImage)
-        model = await tmImage.load(modelURL, metadataURL);
-        maxPredictions = model.getTotalClasses();
+            // carregar o modelo e metadados
+            // Consulte tmImage.loadFromFiles() na API para suportar arquivos de um seletor de arquivos
+            // ou arquivos do seu disco rígido local
+            // Nota: a biblioteca pose adiciona o objeto "tmImage" à sua janela (window.tmImage)
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
 
-        // Convenience function to setup a webcam
-        const flip = true; // whether to flip the webcam
-        webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
-        await webcam.setup(); // request access to the webcam
-        await webcam.play();
-        window.requestAnimationFrame(loop);
+            // Função de conveniência para configurar uma webcam
+            const flip = true; // se deve inverter a webcam
+            webcam = new tmImage.Webcam(400, 225, flip); // largura, altura, inverter
+            await webcam.setup(); // solicitar acesso à webcam
+            await webcam.play();
+            window.requestAnimationFrame(loop);
 
-        // append elements to the DOM
-        document.getElementById("webcam-container").appendChild(webcam.canvas);
-        labelContainer = document.getElementById("label-container");
-        for (let i = 0; i < maxPredictions; i++) {
-          // and class labels
-          labelContainer.appendChild(document.createElement("div"));
+            // anexar elementos ao DOM
+            document.getElementById("webcam-container").appendChild(webcam.canvas);
+            labelContainer = document.getElementById("label-container");
+            for (let i = 0; i < maxPredictions; i++) {
+                // e rótulos de classe
+                labelContainer.appendChild(document.createElement("div"));
+            }
         }
-      }
 
-      async function loop() {
-        webcam.update(); // update the webcam frame
-        await predict();
-        window.requestAnimationFrame(loop);
-      }
-
-      // run the webcam image through the image model
-      async function predict() {
-        // predict can take in an image, video or canvas html element
-        const prediction = await model.predict(webcam.canvas);
-        for (let i = 0; i < maxPredictions; i++) {
-          const classPrediction =
-            prediction[i].className +
-            ": " +
-            (prediction[i].probability * 100).toFixed(0)  + "%" ;
-          labelContainer.childNodes[i].innerHTML = classPrediction;
+        async function loop() {
+            webcam.update(); // atualizar o quadro da webcam
+            await predict();
+            window.requestAnimationFrame(loop);
         }
-      }
+
+        // executar a imagem da webcam através do modelo de imagem
+        async function predict() {
+            // prever pode receber uma imagem, vídeo ou elemento de canvas html
+            const prediction = await model.predict(webcam.canvas);
+            for (let i = 0; i < maxPredictions; i++) {
+                const classPrediction =
+                    prediction[i].className +
+                    ": " +
+                    (prediction[i].probability * 100).toFixed(0) + "%";
+                labelContainer.childNodes[i].innerHTML = classPrediction;
+            }
+        }
     </script>
-  </body>
+</body>
+
 </html>
