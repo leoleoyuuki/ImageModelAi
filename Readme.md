@@ -2,6 +2,9 @@
 
 Este projeto utiliza aprendizado de máquina para reconhecer se uma imagem contém uma garrafa ou um celular. Foram utilizadas 250 imagens para treinar o modelo para reconhecimento de garrafas e 391 imagens para treinar o modelo para reconhecimento de celulares.
 
+## Teste
+[ImageModelAi.com](https://leoleoyuuki.github.io/ImageModelAi/)
+
 ## Instalação
 
 Para utilizar este projeto, siga estas etapas:
