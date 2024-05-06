@@ -6,7 +6,7 @@ Este projeto utiliza aprendizado de m√°quina para reconhecer se uma imagem cont√
 ## Processo de Annotating / Labelling.
 
 <div align="center">  
-  <img width="49%" height="195px" src="Labeling.png" /> 
+  <img width="90%" height="195px" src="Labeling.png" /> 
 </div>
 
 
