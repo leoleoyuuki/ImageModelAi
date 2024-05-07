@@ -9,6 +9,22 @@ Este projeto utiliza aprendizado de máquina para reconhecer se uma imagem cont�
   <img width="90%" height="auto" src="Labelling.png" /> 
 </div>
 
+## Função Predict
+
+```plaintext
+// executar a imagem da webcam através do modelo de imagem
+        async function predict() {
+            // prever pode receber uma imagem, vídeo ou elemento de canvas html
+            const prediction = await model.predict(webcam.canvas);
+            for (let i = 0; i < maxPredictions; i++) {
+                const classPrediction =
+                    prediction[i].className +
+                    ": " +
+                    (prediction[i].probability * 100).toFixed(0) + "%";
+                labelContainer.childNodes[i].innerHTML = classPrediction;
+            }
+        }
+```
 
 ## Teste
 [ImageModelAi.com](https://leoleoyuuki.github.io/ImageModelAi/)
