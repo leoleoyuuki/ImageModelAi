@@ -26,7 +26,7 @@ Este projeto utiliza aprendizado de máquina para reconhecer se uma imagem cont�
         }
 ```
 
-## Teste
+## Site  Teste
 [ImageModelAi.com](https://leoleoyuuki.github.io/ImageModelAi/)
 
 ## Instalação (caso queira)
